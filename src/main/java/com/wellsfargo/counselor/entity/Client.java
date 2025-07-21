@@ -1,16 +1,15 @@
 package com.wellsfargo.counselor.entity;
-
-
-import jakarta.persistence.*;
 import java.util.Set;
-import java.lang.ref.Cleaner;
+import jakarta.persistence.*;
+import jdk.jfr.Relational;
 
 @Entity
-public class Advisor {
-
+public class Client {
     @Id
     @GeneratedValue()
-    private long advisorId;
+    private long clientId;
+
+
 
     @Column(nullable = false)
     private String firstName;
@@ -27,30 +26,39 @@ public class Advisor {
     @Column(nullable = false)
     private String email;
 
-    @OneToMany(targetEntity = Client.class)
-    @JoinColumn(name = "clientId", nullable = false)
-    private Set<Client> clientSet;
+    @ManyToOne(targetEntity = Advisor.class)
+    @JoinColumn(name = "advisorId", nullable = false)
+    private Advisor advisor;
 
 
+    @OneToMany(targetEntity = Portfolio.class)
+    @JoinColumn(name = "portfolioId", nullable = false)
+    private Set<Portfolio> portfolios;
 
-    protected Advisor() {
+    protected Client() {
 
     }
 
-    public Advisor(String firstName, String lastName, String address, String phone, String email, Set<Client> clientSet) {
+    public Client(String firstName, String lastName, String address, String phone, String email, Advisor advisor, Set<Portfolio> portfolios) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phone = phone;
         this.email = email;
-        this.clientSet = clientSet;
+        this.advisor = advisor;
+        this.portfolios = portfolios;
     }
 
 
-
-    public Long getAdvisorId() {
-        return advisorId;
+    public Advisor getAdvisor() {
+        return advisor;
     }
+
+    public void setAdvisor(Advisor advisor) { this.advisor = advisor;}
+
+    public Set<Portfolio> getPortfolios() { return portfolios; }
+
+    public void setPortfolios(Set<Portfolio> portfolios) { this.portfolios = portfolios;}
 
     public String getFirstName() {
         return firstName;
@@ -92,10 +100,5 @@ public class Advisor {
         this.email = email;
     }
 
-    public Set<Client> getClientSet() { return clientSet; }
-
-    public void setClientSet(Set<Client> clientSet) {
-        this.clientSet = clientSet;
-    }
-
+    public long getClientId() { return clientId;}
 }
