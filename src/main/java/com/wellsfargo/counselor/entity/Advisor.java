@@ -27,9 +27,6 @@ public class Advisor {
     @Column(nullable = false)
     private String email;
 
-    @OneToMany(targetEntity = Client.class)
-    @JoinColumn(name = "clientId", nullable = false)
-    private Set<Client> clientSet;
 
 
 
@@ -37,13 +34,13 @@ public class Advisor {
 
     }
 
-    public Advisor(String firstName, String lastName, String address, String phone, String email, Set<Client> clientSet) {
+    public Advisor(String firstName, String lastName, String address, String phone, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phone = phone;
         this.email = email;
-        this.clientSet = clientSet;
+
     }
 
 
@@ -92,10 +89,5 @@ public class Advisor {
         this.email = email;
     }
 
-    public Set<Client> getClientSet() { return clientSet; }
-
-    public void setClientSet(Set<Client> clientSet) {
-        this.clientSet = clientSet;
-    }
 
 }

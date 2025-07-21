@@ -31,9 +31,7 @@ public class Client {
     private Advisor advisor;
 
 
-    @OneToMany(targetEntity = Portfolio.class)
-    @JoinColumn(name = "portfolioId", nullable = false)
-    private Set<Portfolio> portfolios;
+
 
     protected Client() {
 
@@ -46,7 +44,6 @@ public class Client {
         this.phone = phone;
         this.email = email;
         this.advisor = advisor;
-        this.portfolios = portfolios;
     }
 
 
@@ -56,9 +53,8 @@ public class Client {
 
     public void setAdvisor(Advisor advisor) { this.advisor = advisor;}
 
-    public Set<Portfolio> getPortfolios() { return portfolios; }
 
-    public void setPortfolios(Set<Portfolio> portfolios) { this.portfolios = portfolios;}
+
 
     public String getFirstName() {
         return firstName;

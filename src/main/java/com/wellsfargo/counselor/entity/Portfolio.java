@@ -17,9 +17,7 @@ public class Portfolio {
     @Column(nullable = false)
     private String creationDate;
 
-    @OneToMany(targetEntity = Security.class)
-    @JoinColumn(name = "securityId", nullable = false)
-    private Set<Security> security;
+
 
     protected Portfolio() {
 
@@ -28,7 +26,6 @@ public class Portfolio {
     public Portfolio(Client client, String creationDate, Set<Security> security) {
         this.client = client;
         this.creationDate = creationDate;
-        this.security = security;
     }
 
     public Long getPortfolioId() { return portfolioId;}
@@ -36,7 +33,6 @@ public class Portfolio {
     public void setClient(Client client) { this.client = client;}
     public String getCreationDate() { return creationDate;}
     public void setCreationDate(String creationDate) { this.creationDate = creationDate;}
-    public Set<Security> getSecurity() { return security;}
-    public void setSecurity(Set<Security> security) { this.security = security;}
+
 
 }
